@@ -32,11 +32,17 @@
         }
 
         .logo {
-            font-size: 3.5em;
-            font-weight: 800;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            letter-spacing: -2px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
         }
 
         .logo-subtitle {
@@ -221,8 +227,8 @@
         }
 
         @media (max-width: 768px) {
-            .logo {
-                font-size: 2.5em;
+            .logo img {
+                max-width: 280px;
             }
 
             .products-grid {
@@ -255,7 +261,9 @@
 <body>
     <div class="container">
         <header>
-            <div class="logo">Impact IQ</div>
+            <div class="logo">
+                <img src="https://github.com/user-attachments/assets/436670cb-9aec-4ae9-8a5c-ace341ff9283" alt="Impact IQ Logo" />
+            </div>
             <div class="logo-subtitle">Intelligent Data Solutions</div>
             <p class="tagline">Powerful tools for data analysis, visualization, and business intelligence. Choose the solution that fits your needs.</p>
             <div class="free-badge">100% Free & Open Source</div>

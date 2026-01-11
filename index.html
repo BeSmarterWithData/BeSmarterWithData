@@ -73,6 +73,11 @@
             display: block;
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .product-card:focus {
+            outline: 3px solid #667eea;
         }
 
         .product-card::before {
@@ -181,6 +186,16 @@
             box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
         }
 
+        .text-center {
+            text-align: center;
+        }
+
+        .footer-copyright {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
         footer {
             text-align: center;
             padding: 40px 20px;
@@ -231,10 +246,6 @@
             }
         }
 
-        .product-card {
-            animation: fadeInUp 0.6s ease-out backwards;
-        }
-
         .product-card:nth-child(1) { animation-delay: 0.1s; }
         .product-card:nth-child(2) { animation-delay: 0.2s; }
         .product-card:nth-child(3) { animation-delay: 0.3s; }
@@ -264,7 +275,7 @@
                     <li>Enterprise-ready scalability</li>
                     <li>Collaborative workspace</li>
                 </ul>
-                <div style="text-align: center;">
+                <div class="text-center">
                     <span class="cta-button">Explore Impact IQ →</span>
                 </div>
             </a>
@@ -282,7 +293,7 @@
                     <li>Enhanced security</li>
                     <li>Air-gapped environments</li>
                 </ul>
-                <div style="text-align: center;">
+                <div class="text-center">
                     <span class="cta-button">Explore Local →</span>
                 </div>
             </a>
@@ -300,7 +311,7 @@
                     <li>Knowledge graph support</li>
                     <li>Enhanced data context</li>
                 </ul>
-                <div style="text-align: center;">
+                <div class="text-center">
                     <span class="cta-button">Explore SemanticLinkLabs →</span>
                 </div>
             </a>
@@ -318,7 +329,7 @@
                     <li>Resource allocation</li>
                     <li>Centralized administration</li>
                 </ul>
-                <div style="text-align: center;">
+                <div class="text-center">
                     <span class="cta-button">Explore Tenant Admin →</span>
                 </div>
             </a>
@@ -326,27 +337,10 @@
 
         <footer>
             <p>Choose the Impact IQ solution that best fits your needs. All products are free and open source.</p>
-            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">© 2026 Impact IQ - Be Smarter With Data</p>
+            <p class="footer-copyright">© 2026 Impact IQ - Be Smarter With Data</p>
         </footer>
     </div>
 
-    <script>
-        // Add smooth scrolling and interaction enhancements
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.addEventListener('click', function(e) {
-                // Let the link work naturally
-                console.log('Navigating to:', this.href);
-            });
-        });
 
-        // Add keyboard navigation support
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Tab') {
-                document.querySelectorAll('.product-card:focus').forEach(card => {
-                    card.style.outline = '3px solid #667eea';
-                });
-            }
-        });
-    </script>
 </body>
 </html>

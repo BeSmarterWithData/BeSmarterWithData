@@ -3,10 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello Page</title>
+    <title>Impact IQ - Intelligent Data Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .logo {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -2px;
+        }
+
+        .logo-subtitle {
+            font-size: 1.2em;
+            font-weight: 300;
+            opacity: 0.95;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 1.1em;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .product-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .product-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover .product-icon {
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        .product-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #2d3748;
+            text-align: center;
+        }
+
+        .product-description {
+            color: #4a5568;
+            margin-bottom: 20px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .product-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .product-features li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #4a5568;
+            font-size: 0.95em;
+        }
+
+        .product-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .product-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 15px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1em;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: white;
+            margin-top: 60px;
+        }
+
+        footer p {
+            opacity: 0.9;
+            font-size: 0.95em;
+        }
+
+        .free-badge {
+            background: #48bb78;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1.1em;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5em;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeInUp 0.6s ease-out backwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
 </head>
 <body>
-    <h1>Hello, World!</h1>
-    <p>This is a basic HTML template.</p>
+    <div class="container">
+        <header>
+            <div class="logo">Impact IQ</div>
+            <div class="logo-subtitle">Intelligent Data Solutions</div>
+            <p class="tagline">Powerful tools for data analysis, visualization, and business intelligence. Choose the solution that fits your needs.</p>
+            <div class="free-badge">100% Free & Open Source</div>
+        </header>
+
+        <div class="products-grid">
+            <!-- Impact IQ Core -->
+            <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="product-card" target="_blank" rel="noopener noreferrer">
+                <div class="product-icon">📊</div>
+                <h2 class="product-title">Impact IQ</h2>
+                <span class="product-badge">Core Platform</span>
+                <p class="product-description">The flagship solution for comprehensive data analysis and business intelligence.</p>
+                <ul class="product-features">
+                    <li>Full-featured BI platform</li>
+                    <li>Cloud-based deployment</li>
+                    <li>Advanced analytics engine</li>
+                    <li>Enterprise-ready scalability</li>
+                    <li>Collaborative workspace</li>
+                </ul>
+                <div style="text-align: center;">
+                    <span class="cta-button">Explore Impact IQ →</span>
+                </div>
+            </a>
+
+            <!-- Impact IQ Local -->
+            <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="product-card" target="_blank" rel="noopener noreferrer">
+                <div class="product-icon">💻</div>
+                <h2 class="product-title">Impact IQ Local</h2>
+                <span class="product-badge">On-Premise</span>
+                <p class="product-description">Run Impact IQ on your local infrastructure for complete data control and privacy.</p>
+                <ul class="product-features">
+                    <li>Full data sovereignty</li>
+                    <li>No internet required</li>
+                    <li>Local deployment</li>
+                    <li>Enhanced security</li>
+                    <li>Air-gapped environments</li>
+                </ul>
+                <div style="text-align: center;">
+                    <span class="cta-button">Explore Local →</span>
+                </div>
+            </a>
+
+            <!-- Impact IQ SemanticLinkLabs -->
+            <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="product-card" target="_blank" rel="noopener noreferrer">
+                <div class="product-icon">🔗</div>
+                <h2 class="product-title">Impact IQ SemanticLinkLabs</h2>
+                <span class="product-badge">Advanced Integration</span>
+                <p class="product-description">Leverage semantic links and advanced data relationships for deeper insights.</p>
+                <ul class="product-features">
+                    <li>Semantic data modeling</li>
+                    <li>Intelligent data linking</li>
+                    <li>Relationship discovery</li>
+                    <li>Knowledge graph support</li>
+                    <li>Enhanced data context</li>
+                </ul>
+                <div style="text-align: center;">
+                    <span class="cta-button">Explore SemanticLinkLabs →</span>
+                </div>
+            </a>
+
+            <!-- Impact IQ Tenant Admin -->
+            <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="product-card" target="_blank" rel="noopener noreferrer">
+                <div class="product-icon">⚙️</div>
+                <h2 class="product-title">Impact IQ Tenant Admin</h2>
+                <span class="product-badge">Management</span>
+                <p class="product-description">Comprehensive tenant administration and multi-workspace management tools.</p>
+                <ul class="product-features">
+                    <li>Multi-tenant management</li>
+                    <li>User access control</li>
+                    <li>Workspace configuration</li>
+                    <li>Resource allocation</li>
+                    <li>Centralized administration</li>
+                </ul>
+                <div style="text-align: center;">
+                    <span class="cta-button">Explore Tenant Admin →</span>
+                </div>
+            </a>
+        </div>
+
+        <footer>
+            <p>Choose the Impact IQ solution that best fits your needs. All products are free and open source.</p>
+            <p style="margin-top: 20px; font-size: 0.9em; opacity: 0.8;">© 2026 Impact IQ - Be Smarter With Data</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth scrolling and interaction enhancements
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Let the link work naturally
+                console.log('Navigating to:', this.href);
+            });
+        });
+
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Tab') {
+                document.querySelectorAll('.product-card:focus').forEach(card => {
+                    card.style.outline = '3px solid #667eea';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

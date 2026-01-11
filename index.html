@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Impact IQ - Be smarter with every change</title>
+    <title>Impact IQ - Power BI Governance & Impact Analysis Platform</title>
     <style>
         * {
             margin: 0;
@@ -11,147 +11,324 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            color: #1a202c;
+            background: #ffffff;
         }
 
-        .container {
+        /* Navigation */
+        nav {
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 60px 20px;
-            color: white;
-        }
-
-        .logo {
-            margin-bottom: 20px;
+            padding: 1rem 2rem;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .logo img {
-            max-width: 400px;
-            width: 100%;
-            height: auto;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            text-decoration: none;
         }
 
-        .logo-subtitle {
-            font-size: 1.2em;
-            font-weight: 300;
+        .nav-logo-icon {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .nav-cta {
+            background: #667eea;
+            color: white !important;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: #5568d3;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 140px 2rem 100px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             opacity: 0.95;
-            margin-bottom: 20px;
+            font-weight: 300;
         }
 
-        .tagline {
-            font-size: 1.1em;
+        .hero-description {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .badge-success {
+            background: #48bb78;
+            border-color: #48bb78;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 2rem;
+            background: #f7fafc;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #718096;
             max-width: 700px;
             margin: 0 auto;
-            opacity: 0.9;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+        }
+
+        .feature-description {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 100px 2rem;
+            background: white;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-            padding: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
         }
 
         .product-card {
             background: white;
-            border-radius: 20px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
             transition: all 0.3s ease;
-            cursor: pointer;
             text-decoration: none;
             color: inherit;
             display: block;
             position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.6s ease-out backwards;
-        }
-
-        .product-card:focus {
-            outline: 3px solid #667eea;
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            border: 2px solid #e2e8f0;
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .product-card:hover::before {
-            transform: scaleX(1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            border-color: #667eea;
         }
 
         .product-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 20px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5em;
+            font-size: 2.5rem;
             color: white;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .product-card:hover .product-icon {
-            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
         }
 
         .product-title {
-            font-size: 1.5em;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 1rem;
             color: #2d3748;
             text-align: center;
         }
 
+        .product-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
         .product-description {
             color: #4a5568;
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
             line-height: 1.7;
             text-align: center;
         }
 
         .product-features {
             list-style: none;
-            margin: 20px 0;
+            margin: 1.5rem 0;
         }
 
         .product-features li {
-            padding: 8px 0;
-            padding-left: 25px;
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
             position: relative;
             color: #4a5568;
-            font-size: 0.95em;
+            font-size: 0.95rem;
         }
 
         .product-features li::before {
@@ -160,195 +337,456 @@
             left: 0;
             color: #667eea;
             font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        .product-badge {
-            display: inline-block;
-            padding: 5px 15px;
+        .product-cta {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            border-radius: 20px;
-            font-size: 0.8em;
-            font-weight: 600;
-            margin-top: 15px;
-        }
-
-        .cta-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
             text-decoration: none;
             display: inline-block;
-            margin-top: 15px;
+            margin-top: 1rem;
             font-weight: 600;
             transition: all 0.3s ease;
-            border: none;
-            font-size: 1em;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.5);
-        }
-
-        .text-center {
             text-align: center;
+            width: 100%;
         }
 
-        .footer-copyright {
-            margin-top: 20px;
-            font-size: 0.9em;
-            opacity: 0.8;
+        .product-cta:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            margin-top: 60px;
         }
 
-        footer p {
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .step-card {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            border: 3px solid rgba(255,255,255,0.4);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
             opacity: 0.9;
-            font-size: 0.95em;
+            line-height: 1.7;
         }
 
-        .free-badge {
-            background: #48bb78;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
+        /* Platform Compatibility */
+        .compatibility {
+            padding: 80px 2rem;
+            background: #f7fafc;
+            text-align: center;
+        }
+
+        .compatibility-badges {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .compat-badge {
+            background: white;
+            padding: 1.5rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
             font-weight: 600;
-            display: inline-block;
-            margin-top: 20px;
-            font-size: 1.1em;
-            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+            color: #2d3748;
+            border: 2px solid #e2e8f0;
         }
 
+        /* Footer */
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 60px 2rem 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #4a5568;
+            padding-top: 2rem;
+            text-align: center;
+            color: #cbd5e0;
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .logo img {
-                max-width: 280px;
+            .nav-links {
+                display: none;
             }
 
-            .products-grid {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .products-grid,
+            .features-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            header {
-                padding: 40px 20px;
             }
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .product-card:nth-child(1) { animation-delay: 0.1s; }
-        .product-card:nth-child(2) { animation-delay: 0.2s; }
-        .product-card:nth-child(3) { animation-delay: 0.3s; }
-        .product-card:nth-child(4) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <img src="https://github.com/user-attachments/assets/436670cb-9aec-4ae9-8a5c-ace341ff9283" alt="Impact IQ Logo" />
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="nav-logo-icon">📊</span>
+                <span>Impact IQ</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#products">Products</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="https://github.com/BeSmarterWithData" target="_blank" class="nav-cta">View on GitHub</a>
             </div>
-            <div class="logo-subtitle">Be smarter with every change</div>
-            <p class="tagline"></p>
-            <div class="free-badge">100% Free & Open Source</div>
-        </header>
-
-        <div class="products-grid">
-            <!-- Impact IQ Core -->
-            <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="product-card" target="_blank" rel="noopener noreferrer">
-                <div class="product-icon">📊</div>
-                <h2 class="product-title">Impact IQ</h2>
-                <span class="product-badge">Core Platform</span>
-                <p class="product-description">1-click • Any User • Any Computer • Any Workspace</p>
-                <ul class="product-features">
-                    <li>1-click & PowerShell deployment</li>
-                    <li>Works with legacy & PBIR formats</li>
-                    <li>Environment review capabilities</li>
-                    <li>Metadata extraction & analysis</li>
-                    <li>Quick setup and configuration</li>
-                </ul>
-                <div class="text-center">
-                    <span class="cta-button">Explore Impact IQ →</span>
-                </div>
-            </a>
-
-            <!-- Impact IQ Local -->
-            <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="product-card" target="_blank" rel="noopener noreferrer">
-                <div class="product-icon">💻</div>
-                <h2 class="product-title">Impact IQ Local</h2>
-                <span class="product-badge">Local-Only</span>
-                <p class="product-description">Fully local solution for offline Power BI analysis without environment connectivity.</p>
-                <ul class="product-features">
-                    <li>100% local deployment</li>
-                    <li>No internet required</li>
-                    <li>Complete data privacy</li>
-                    <li>Air-gapped environments</li>
-                    <li>No environment/metadata review</li>
-                </ul>
-                <div class="text-center">
-                    <span class="cta-button">Explore Local →</span>
-                </div>
-            </a>
-
-            <!-- Impact IQ SemanticLinkLabs -->
-            <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="product-card" target="_blank" rel="noopener noreferrer">
-                <div class="product-icon">🔗</div>
-                <h2 class="product-title">Impact IQ SemanticLinkLabs</h2>
-                <span class="product-badge">Cloud Automation</span>
-                <p class="product-description">Cloud-based solution with full automation into Fabric lakehouses for modern workflows.</p>
-                <ul class="product-features">
-                    <li>Cloud-based deployment</li>
-                    <li>100% automated to lakehouse</li>
-                    <li>Semantic link integration</li>
-                    <li>PBIR format only</li>
-                    <li>Fabric-native workflows</li>
-                </ul>
-                <div class="text-center">
-                    <span class="cta-button">Explore SemanticLinkLabs →</span>
-                </div>
-            </a>
-
-            <!-- Impact IQ Tenant Admin -->
-            <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="product-card" target="_blank" rel="noopener noreferrer">
-                <div class="product-icon">⚙️</div>
-                <h2 class="product-title">Impact IQ Tenant Admin</h2>
-                <span class="product-badge">Enterprise Admin</span>
-                <p class="product-description">Enhanced platform with all core features plus workspace permissions and metadata management.</p>
-                <ul class="product-features">
-                    <li>All 1-click features included</li>
-                    <li>Workspace permission grants</li>
-                    <li>Permission-based metadata</li>
-                    <li>Advanced admin controls</li>
-                    <li>Tenant-wide governance</li>
-                </ul>
-                <div class="text-center">
-                    <span class="cta-button">Explore Tenant Admin →</span>
-                </div>
-            </a>
         </div>
+    </nav>
 
-        <footer>
-            <p>Choose the Impact IQ solution that best fits your needs. All products are free and open source.</p>
-            <p class="footer-copyright">© 2026 Impact IQ - Be Smarter With Data</p>
-        </footer>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Power BI Governance & Impact Analysis</h1>
+            <p class="hero-subtitle">Be smarter with every change</p>
+            <p class="hero-description">
+                Know exactly what's used and where, what might break, and back it all up. 
+                Complete impact analysis down to the visual level across all workspaces.
+            </p>
+            <div class="hero-badges">
+                <span class="badge">📊 Any User</span>
+                <span class="badge">💻 Any Computer</span>
+                <span class="badge">📁 Any Workspace</span>
+                <span class="badge badge-success">✓ 100% Free & Open Source</span>
+            </div>
+            <div class="hero-cta">
+                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="https://github.com/BeSmarterWithData" target="_blank" class="btn btn-secondary">View on GitHub →</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Comprehensive Governance Features</h2>
+                <p class="section-subtitle">
+                    Everything you need to manage, protect, and understand your Power BI environment
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3 class="feature-title">Visual Impact Analysis</h3>
+                    <p class="feature-description">
+                        Trace usage of measures, fields, and tables down to individual visual objects. 
+                        Know exactly what will break before you make changes.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3 class="feature-title">Comprehensive Backups</h3>
+                    <p class="feature-description">
+                        Complete backups for reports (.pbix), paginated reports (.rdl), models, 
+                        and dataflows. Never lose your work again.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Environment Overview</h3>
+                    <p class="feature-description">
+                        Complete Power BI environment details via REST API. See all workspaces, 
+                        reports, and datasets in one place.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔗</div>
+                    <h3 class="feature-title">Connection Tracking</h3>
+                    <p class="feature-description">
+                        Track all model and dataflow connection information. Understand your 
+                        data sources and dependencies.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3 class="feature-title">Refresh History</h3>
+                    <p class="feature-description">
+                        Monitor historical refresh data for models and dataflows. Identify 
+                        patterns and troubleshoot issues.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">No Admin Required</h3>
+                    <p class="feature-description">
+                        User-level permissions only. Portable tools included. Works right out 
+                        of the box with minimal setup.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Choose Your Impact IQ Solution</h2>
+                <p class="section-subtitle">
+                    Four specialized products to match your specific Power BI governance needs
+                </p>
+            </div>
+            <div class="products-grid">
+                <!-- Impact IQ Core -->
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="product-card" target="_blank" rel="noopener noreferrer">
+                    <div class="product-icon">📊</div>
+                    <h2 class="product-title">Impact IQ</h2>
+                    <div style="text-align: center;">
+                        <span class="product-badge">Core Platform</span>
+                    </div>
+                    <p class="product-description">1-click • Any User • Any Computer • Any Workspace</p>
+                    <ul class="product-features">
+                        <li>1-click & PowerShell deployment</li>
+                        <li>Works with legacy & PBIR formats</li>
+                        <li>Environment review capabilities</li>
+                        <li>Metadata extraction & analysis</li>
+                        <li>Quick setup and configuration</li>
+                    </ul>
+                    <span class="product-cta">Explore Impact IQ →</span>
+                </a>
+
+                <!-- Impact IQ Local -->
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="product-card" target="_blank" rel="noopener noreferrer">
+                    <div class="product-icon">💻</div>
+                    <h2 class="product-title">Impact IQ Local</h2>
+                    <div style="text-align: center;">
+                        <span class="product-badge">Local-Only</span>
+                    </div>
+                    <p class="product-description">Fully local solution for offline Power BI analysis without environment connectivity.</p>
+                    <ul class="product-features">
+                        <li>100% local deployment</li>
+                        <li>No internet required</li>
+                        <li>Complete data privacy</li>
+                        <li>Air-gapped environments</li>
+                        <li>No environment/metadata review</li>
+                    </ul>
+                    <span class="product-cta">Explore Local →</span>
+                </a>
+
+                <!-- Impact IQ SemanticLinkLabs -->
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="product-card" target="_blank" rel="noopener noreferrer">
+                    <div class="product-icon">🔗</div>
+                    <h2 class="product-title">Impact IQ SemanticLinkLabs</h2>
+                    <div style="text-align: center;">
+                        <span class="product-badge">Cloud Automation</span>
+                    </div>
+                    <p class="product-description">Cloud-based solution with full automation into Fabric lakehouses for modern workflows.</p>
+                    <ul class="product-features">
+                        <li>Cloud-based deployment</li>
+                        <li>100% automated to lakehouse</li>
+                        <li>Semantic link integration</li>
+                        <li>PBIR format only</li>
+                        <li>Fabric-native workflows</li>
+                    </ul>
+                    <span class="product-cta">Explore SemanticLinkLabs →</span>
+                </a>
+
+                <!-- Impact IQ Tenant Admin -->
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="product-card" target="_blank" rel="noopener noreferrer">
+                    <div class="product-icon">⚙️</div>
+                    <h2 class="product-title">Impact IQ Tenant Admin</h2>
+                    <div style="text-align: center;">
+                        <span class="product-badge">Enterprise Admin</span>
+                    </div>
+                    <p class="product-description">Enhanced platform with all core features plus workspace permissions and metadata management.</p>
+                    <ul class="product-features">
+                        <li>All 1-click features included</li>
+                        <li>Workspace permission grants</li>
+                        <li>Permission-based metadata</li>
+                        <li>Advanced admin controls</li>
+                        <li>Tenant-wide governance</li>
+                    </ul>
+                    <span class="product-cta">Explore Tenant Admin →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">How It Works</h2>
+                <p class="section-subtitle">Get started in minutes with our streamlined process</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Download</h3>
+                    <p class="step-description">
+                        Clone or download the solution from GitHub. All tools are included and portable.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Run Script</h3>
+                    <p class="step-description">
+                        Execute the PowerShell script with one click. Automatic authentication and setup.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Analyze</h3>
+                    <p class="step-description">
+                        Explore your Power BI environment with comprehensive insights and impact analysis.
+                    </p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Govern</h3>
+                    <p class="step-description">
+                        Make informed decisions with complete visibility into dependencies and impacts.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Compatibility -->
+    <section class="compatibility">
+        <div class="section-container">
+            <h2 class="section-title">Works With All Power BI Platforms</h2>
+            <p class="section-subtitle">Compatible with every workspace type and capacity</p>
+            <div class="compatibility-badges">
+                <div class="compat-badge">✓ Power BI Pro</div>
+                <div class="compat-badge">✓ Premium</div>
+                <div class="compat-badge">✓ Premium Per User</div>
+                <div class="compat-badge">✓ Fabric</div>
+                <div class="compat-badge">✓ My Workspace</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Impact IQ</h3>
+                    <p style="color: #cbd5e0; line-height: 1.7;">
+                        Power BI governance and impact analysis platform. 
+                        100% free and open source.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ" target="_blank">Impact IQ Core</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" target="_blank">Impact IQ Local</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" target="_blank">SemanticLinkLabs</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" target="_blank">Tenant Admin</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/BeSmarterWithData" target="_blank">GitHub Organization</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/Power_BI_Governance_Presentation" target="_blank">Presentation</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ/issues" target="_blank">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/BeSmarterWithData" target="_blank">GitHub</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ/discussions" target="_blank">Discussions</a></li>
+                        <li><a href="https://github.com/BeSmarterWithData/ImpactIQ/blob/main/CONTRIBUTING.md" target="_blank">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Impact IQ - Be Smarter With Data. All products are free and open source.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

@@ -1,0 +1,45 @@
+<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Teal gradient background -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0d7377;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#14919b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d7377;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="barGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd93d;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f39c12;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="ribbonGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7fffd4;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#20b2aa;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background with network pattern -->
+  <rect width="800" height="200" fill="url(#bgGradient)"/>
+  
+  <!-- Network pattern circles (decorative) -->
+  <circle cx="120" cy="40" r="3" fill="#0d7377" opacity="0.4"/>
+  <circle cx="180" cy="160" r="3" fill="#0d7377" opacity="0.4"/>
+  <circle cx="620" cy="50" r="3" fill="#0d7377" opacity="0.4"/>
+  <circle cx="720" cy="150" r="3" fill="#0d7377" opacity="0.4"/>
+  
+  <!-- Left bar chart icon -->
+  <g transform="translate(80, 60)">
+    <rect x="0" y="50" width="35" height="30" rx="4" fill="#f8f4b4" opacity="0.9"/>
+    <rect x="40" y="30" width="35" height="50" rx="4" fill="#ffd93d" opacity="0.95"/>
+    <rect x="80" y="0" width="35" height="80" rx="4" fill="url(#barGradient)"/>
+  </g>
+  
+  <!-- Center text: IMPACT IQ -->
+  <text x="400" y="115" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="2">IMPACT IQ</text>
+  
+  <!-- Right ribbon/flag icon -->
+  <g transform="translate(650, 50)">
+    <!-- Ribbon shape -->
+    <path d="M 0,0 L 80,0 L 100,50 L 80,100 L 0,100 L 20,50 Z" fill="url(#ribbonGradient)" opacity="0.85"/>
+    <!-- Fold effect -->
+    <path d="M 20,50 L 0,60 L 0,100 L 20,90 Z" fill="#14919b" opacity="0.6"/>
+  </g>
+</svg>

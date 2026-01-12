@@ -24,8 +24,9 @@
 
         /* Navigation */
         nav {
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
             position: fixed;
             top: 0;
             width: 100%;
@@ -47,7 +48,10 @@
             gap: 12px;
             font-size: 1.5rem;
             font-weight: 700;
-            color: #667eea;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
         }
 
@@ -62,41 +66,74 @@
         }
 
         .nav-links a {
-            color: #4a5568;
+            color: #4b5563;
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: #667eea;
+            color: #6366f1;
+        }
+
+        .nav-links a:not(.nav-cta)::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #6366f1, #a855f7);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:not(.nav-cta):hover::after {
+            width: 100%;
         }
 
         .nav-cta {
-            background: #667eea;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
             color: white !important;
             padding: 0.6rem 1.5rem;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: background 0.3s;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
         .nav-cta:hover {
-            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
         }
 
         /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
             color: white;
             padding: 140px 2rem 100px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.4;
         }
 
         .hero-container {
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -104,6 +141,7 @@
             font-weight: 800;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .hero-subtitle {
@@ -129,17 +167,24 @@
         }
 
         .badge {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
             backdrop-filter: blur(10px);
             padding: 0.5rem 1.5rem;
             border-radius: 25px;
             font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.3);
+            border: 2px solid rgba(255,255,255,0.4);
+            transition: all 0.3s;
+        }
+
+        .badge:hover {
+            background: rgba(255,255,255,0.35);
+            transform: translateY(-2px);
         }
 
         .badge-success {
-            background: #48bb78;
-            border-color: #48bb78;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-color: rgba(255,255,255,0.5);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
         }
 
         .hero-cta {
@@ -151,7 +196,7 @@
 
         .btn {
             padding: 1rem 2.5rem;
-            border-radius: 8px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: 600;
             font-size: 1.1rem;
@@ -161,28 +206,31 @@
 
         .btn-primary {
             background: white;
-            color: #667eea;
+            color: #6366f1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
         .btn-secondary {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             color: white;
-            border: 2px solid white;
+            border: 2px solid rgba(255,255,255,0.6);
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.25);
+            border-color: white;
         }
 
         /* Features Section */
         .features-section {
             padding: 100px 2rem;
-            background: #f7fafc;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
         }
 
         .section-container {
@@ -198,13 +246,13 @@
         .section-title {
             font-size: 2.5rem;
             font-weight: 700;
-            color: #2d3748;
+            color: #1e293b;
             margin-bottom: 1rem;
         }
 
         .section-subtitle {
             font-size: 1.2rem;
-            color: #718096;
+            color: #64748b;
             max-width: 700px;
             margin: 0 auto;
         }
@@ -218,35 +266,55 @@
         .feature-card {
             background: white;
             padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: all 0.3s;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            transform: scaleX(0);
+            transition: transform 0.4s;
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 24px rgba(99, 102, 241, 0.15);
+            border-color: #a855f7;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
         }
 
         .feature-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(99, 102, 241, 0.2));
         }
 
         .feature-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #2d3748;
+            color: #1e293b;
             margin-bottom: 0.75rem;
         }
 
         .feature-description {
-            color: #4a5568;
+            color: #64748b;
             line-height: 1.7;
         }
 
-        /* Products Section */
+        /* Solutions Section */
         .products-section {
             padding: 100px 2rem;
             background: white;
@@ -354,12 +422,148 @@
             width: 100%;
         }
 
-        .product-cta:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        /* Solutions Section */
+        .solutions-section {
+            padding: 100px 2rem;
+            background: white;
         }
 
-        /* How It Works Section */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            position: relative;
+            border: 2px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        .solution-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #ec4899);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+            border-color: #a855f7;
+        }
+
+        .solution-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .solution-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s;
+        }
+
+        .solution-card:hover .solution-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 12px 28px rgba(168, 85, 247, 0.4);
+        }
+
+        .solution-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .solution-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(99, 102, 241, 0.2);
+        }
+
+        .solution-description {
+            color: #64748b;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .solution-features {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .solution-features li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .solution-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .solution-cta {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .solution-cta:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(168, 85, 247, 0.4);
+        }
+
+        .solution-badge-container {
+            text-align: center;
+        }
         .how-it-works {
             padding: 100px 2rem;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -405,7 +609,7 @@
         /* Platform Compatibility */
         .compatibility {
             padding: 80px 2rem;
-            background: #f7fafc;
+            background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
             text-align: center;
         }
 
@@ -421,15 +625,22 @@
             background: white;
             padding: 1.5rem 2.5rem;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             font-weight: 600;
-            color: #2d3748;
+            color: #1e293b;
             border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .compat-badge:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.15);
+            border-color: #a855f7;
         }
 
         /* Footer */
         footer {
-            background: #2d3748;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
             color: white;
             padding: 60px 2rem 30px;
         }
@@ -466,7 +677,7 @@
         }
 
         .footer-links a:hover {
-            color: white;
+            color: #a855f7;
         }
 
         .footer-bottom {
@@ -481,8 +692,74 @@
             line-height: 1.7;
         }
 
-        .product-badge-container {
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 2rem;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .how-it-works::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid2" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid2)"/></svg>');
+            opacity: 0.4;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-card {
             text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            border: 3px solid rgba(255,255,255,0.5);
+            transition: all 0.3s;
+        }
+
+        .step-card:hover .step-number {
+            background: rgba(255,255,255,0.35);
+            transform: scale(1.1);
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-description {
+            opacity: 0.9;
+            line-height: 1.7;
         }
 
         /* Responsive Design */
@@ -507,7 +784,7 @@
                 font-size: 2rem;
             }
 
-            .products-grid,
+            .solutions-grid,
             .features-grid {
                 grid-template-columns: 1fr;
             }
@@ -524,7 +801,7 @@
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
-                <a href="#products">Products</a>
+                <a href="#solutions">Solutions</a>
                 <a href="#how-it-works">How It Works</a>
                 <a href="https://github.com/BeSmarterWithData" target="_blank" class="nav-cta">View on GitHub</a>
             </div>
@@ -547,7 +824,7 @@
                 <span class="badge badge-success">✓ 100% Free & Open Source</span>
             </div>
             <div class="hero-cta">
-                <a href="#products" class="btn btn-primary">Explore Products</a>
+                <a href="#solutions" class="btn btn-primary">Explore Solutions</a>
                 <a href="https://github.com/BeSmarterWithData" target="_blank" class="btn btn-secondary">View on GitHub →</a>
             </div>
         </div>
@@ -615,86 +892,86 @@
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" class="products-section">
+    <!-- Solutions Section -->
+    <section id="solutions" class="solutions-section">
         <div class="section-container">
             <div class="section-header">
                 <h2 class="section-title">Choose Your Impact IQ Solution</h2>
                 <p class="section-subtitle">
-                    Four specialized products to match your specific Power BI governance needs
+                    Four specialized solutions to match your specific Power BI governance needs
                 </p>
             </div>
-            <div class="products-grid">
+            <div class="solutions-grid">
                 <!-- Impact IQ Core -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="product-card" target="_blank" rel="noopener noreferrer">
-                    <div class="product-icon">📊</div>
-                    <h2 class="product-title">Impact IQ</h2>
-                    <div class="product-badge-container">
-                        <span class="product-badge">Core Platform</span>
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="solution-card" target="_blank" rel="noopener noreferrer">
+                    <div class="solution-icon">📊</div>
+                    <h2 class="solution-title">Impact IQ</h2>
+                    <div class="solution-badge-container">
+                        <span class="solution-badge">Core Platform</span>
                     </div>
-                    <p class="product-description">1-click • Any User • Any Computer • Any Workspace</p>
-                    <ul class="product-features">
+                    <p class="solution-description">1-click • Any User • Any Computer • Any Workspace</p>
+                    <ul class="solution-features">
                         <li>1-click & PowerShell deployment</li>
                         <li>Works with legacy & PBIR formats</li>
                         <li>Environment review capabilities</li>
                         <li>Metadata extraction & analysis</li>
                         <li>Quick setup and configuration</li>
                     </ul>
-                    <span class="product-cta">Explore Impact IQ →</span>
+                    <span class="solution-cta">Explore Impact IQ →</span>
                 </a>
 
                 <!-- Impact IQ Local -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="product-card" target="_blank" rel="noopener noreferrer">
-                    <div class="product-icon">💻</div>
-                    <h2 class="product-title">Impact IQ Local</h2>
-                    <div class="product-badge-container">
-                        <span class="product-badge">Local-Only</span>
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="solution-card" target="_blank" rel="noopener noreferrer">
+                    <div class="solution-icon">💻</div>
+                    <h2 class="solution-title">Impact IQ Local</h2>
+                    <div class="solution-badge-container">
+                        <span class="solution-badge">Local-Only</span>
                     </div>
-                    <p class="product-description">Fully local solution for offline Power BI analysis without environment connectivity.</p>
-                    <ul class="product-features">
+                    <p class="solution-description">Fully local solution for offline Power BI analysis without environment connectivity.</p>
+                    <ul class="solution-features">
                         <li>100% local deployment</li>
                         <li>No internet required</li>
                         <li>Complete data privacy</li>
                         <li>Air-gapped environments</li>
                         <li>No environment/metadata review</li>
                     </ul>
-                    <span class="product-cta">Explore Local →</span>
+                    <span class="solution-cta">Explore Local →</span>
                 </a>
 
                 <!-- Impact IQ SemanticLinkLabs -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="product-card" target="_blank" rel="noopener noreferrer">
-                    <div class="product-icon">🔗</div>
-                    <h2 class="product-title">Impact IQ SemanticLinkLabs</h2>
-                    <div class="product-badge-container">
-                        <span class="product-badge">Cloud Automation</span>
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="solution-card" target="_blank" rel="noopener noreferrer">
+                    <div class="solution-icon">🔗</div>
+                    <h2 class="solution-title">Impact IQ SemanticLinkLabs</h2>
+                    <div class="solution-badge-container">
+                        <span class="solution-badge">Cloud Automation</span>
                     </div>
-                    <p class="product-description">Cloud-based solution with full automation into Fabric lakehouses for modern workflows.</p>
-                    <ul class="product-features">
+                    <p class="solution-description">Cloud-based solution with full automation into Fabric lakehouses for modern workflows.</p>
+                    <ul class="solution-features">
                         <li>Cloud-based deployment</li>
                         <li>100% automated to lakehouse</li>
                         <li>Semantic link integration</li>
                         <li>PBIR format only</li>
                         <li>Fabric-native workflows</li>
                     </ul>
-                    <span class="product-cta">Explore SemanticLinkLabs →</span>
+                    <span class="solution-cta">Explore SemanticLinkLabs →</span>
                 </a>
 
                 <!-- Impact IQ Tenant Admin -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="product-card" target="_blank" rel="noopener noreferrer">
-                    <div class="product-icon">⚙️</div>
-                    <h2 class="product-title">Impact IQ Tenant Admin</h2>
-                    <div class="product-badge-container">
-                        <span class="product-badge">Enterprise Admin</span>
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="solution-card" target="_blank" rel="noopener noreferrer">
+                    <div class="solution-icon">⚙️</div>
+                    <h2 class="solution-title">Impact IQ Tenant Admin</h2>
+                    <div class="solution-badge-container">
+                        <span class="solution-badge">Enterprise Admin</span>
                     </div>
-                    <p class="product-description">Enhanced platform with all core features plus workspace permissions and metadata management.</p>
-                    <ul class="product-features">
+                    <p class="solution-description">Enhanced platform with all core features plus workspace permissions and metadata management.</p>
+                    <ul class="solution-features">
                         <li>All 1-click features included</li>
                         <li>Workspace permission grants</li>
                         <li>Permission-based metadata</li>
                         <li>Advanced admin controls</li>
                         <li>Tenant-wide governance</li>
                     </ul>
-                    <span class="product-cta">Explore Tenant Admin →</span>
+                    <span class="solution-cta">Explore Tenant Admin →</span>
                 </a>
             </div>
         </div>
@@ -767,7 +1044,7 @@
                     </p>
                 </div>
                 <div class="footer-section">
-                    <h3>Products</h3>
+                    <h3>Solutions</h3>
                     <ul class="footer-links">
                         <li><a href="https://github.com/BeSmarterWithData/ImpactIQ" target="_blank">Impact IQ Core</a></li>
                         <li><a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" target="_blank">Impact IQ Local</a></li>
@@ -793,7 +1070,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 Impact IQ - Be Smarter With Data. All products are free and open source.</p>
+                <p>© 2026 Impact IQ - Be Smarter With Data. All solutions are free and open source.</p>
             </div>
         </div>
     </footer>

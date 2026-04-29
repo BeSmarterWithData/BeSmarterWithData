@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impact IQ - Power BI Governance & Impact Analysis Platform</title>
+    <meta name="description" content="Free, open-source Power BI governance and impact analysis platform. Visual-level impact analysis across all workspaces.">
     <style>
         * {
             margin: 0;
@@ -22,6 +23,76 @@
             background: #ffffff;
         }
 
+        /* Skip to content - accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0 0 8px 8px;
+            font-weight: 600;
+            z-index: 10000;
+            transition: top 0.3s;
+            text-decoration: none;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* Focus styles for accessibility */
+        *:focus-visible {
+            outline: 3px solid #10b981;
+            outline-offset: 2px;
+        }
+
+        /* Scroll-based animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-stagger {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in-stagger.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero entrance animation */
+        .hero-animate {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .hero-animate:nth-child(1) { animation-delay: 0.1s; }
+        .hero-animate:nth-child(2) { animation-delay: 0.25s; }
+        .hero-animate:nth-child(3) { animation-delay: 0.4s; }
+        .hero-animate:nth-child(4) { animation-delay: 0.55s; }
+        .hero-animate:nth-child(5) { animation-delay: 0.7s; }
+        .hero-animate:nth-child(6) { animation-delay: 0.85s; }
+
+        @keyframes heroFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Navigation */
         nav {
             background: rgba(255, 255, 255, 0.98);
@@ -31,6 +102,11 @@
             top: 0;
             width: 100%;
             z-index: 1000;
+            transition: box-shadow 0.3s;
+        }
+
+        nav.nav-scrolled {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.12);
         }
 
         .nav-container {
@@ -73,7 +149,8 @@
             position: relative;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: #10b981;
         }
 
@@ -88,7 +165,8 @@
             transition: width 0.3s;
         }
 
-        .nav-links a:not(.nav-cta):hover::after {
+        .nav-links a:not(.nav-cta):hover::after,
+        .nav-links a:not(.nav-cta).active::after {
             width: 100%;
         }
 
@@ -106,6 +184,38 @@
         .nav-cta:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Mobile hamburger menu */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: #475569;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 6px);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -6px);
         }
 
         /* Hero Section */
@@ -454,6 +564,21 @@
             font-size: 1.2rem;
         }
 
+        .solution-recommended {
+            position: absolute;
+            top: 16px;
+            right: -32px;
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            padding: 0.3rem 2.5rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transform: rotate(45deg);
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
+        }
+
         .solution-cta {
             background: #475569;
             color: white;
@@ -464,7 +589,7 @@
             font-weight: 650;
             transition: all 0.3s ease;
             text-align: center;
-            font-size: clamp(0.7rem, 2.2vw, 0.7rem);
+            font-size: 0.85rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             border-radius: 8px;
@@ -473,6 +598,7 @@
         .solution-cta:hover {
             background: #334155;
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(51, 65, 85, 0.3);
         }
 
         .solution-badge-container {
@@ -635,10 +761,117 @@
             line-height: 1.7;
         }
 
+        /* Stats Section */
+        .stats-section {
+            padding: 60px 2rem;
+            background: white;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #475569 0%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: #64748b;
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.5);
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+
             .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                padding: 5rem 2rem 2rem;
+                gap: 1.5rem;
+                box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+                transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+                align-items: flex-start;
+            }
+
+            .nav-links.open {
+                right: 0;
+            }
+
+            .nav-overlay {
                 display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.4);
+                z-index: 999;
+            }
+
+            .nav-overlay.open {
+                display: block;
             }
 
             .hero-logo {
@@ -666,10 +899,52 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            .hero-badges {
+                gap: 0.5rem;
+            }
+
+            .badge {
+                font-size: 0.85rem;
+                padding: 0.4rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Skip to content - accessibility -->
+    <a href="#main-content" class="skip-to-content">Skip to content</a>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
@@ -677,34 +952,62 @@
                 <span class="nav-logo-icon">📊</span>
                 <span>Impact IQ</span>
             </a>
-            <div class="nav-links">
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <div class="nav-overlay" aria-hidden="true"></div>
+            <div class="nav-links" role="navigation">
                 <a href="#features">Features</a>
                 <a href="#solutions">Solutions</a>
                 <a href="#how-it-works">How It Works</a>
-                <a href="https://github.com/BeSmarterWithData" target="_blank" class="nav-cta">View on GitHub</a>
+                <a href="https://github.com/BeSmarterWithData" target="_blank" rel="noopener noreferrer" class="nav-cta">View on GitHub</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="main-content">
         <div class="hero-container">
-            <img src="impact iq.svg" alt="Impact IQ Logo" class="hero-logo">
-            <h1>Governance & Impact Analysis for Power BI + Fabric</h1>
-            <p class="hero-subtitle">Be smarter with every change</p>
-            <p class="hero-description">
+            <img src="impact iq.svg" alt="Impact IQ Logo" class="hero-logo hero-animate">
+            <h1 class="hero-animate">Governance & Impact Analysis for Power BI + Fabric</h1>
+            <p class="hero-subtitle hero-animate">Be smarter with every change</p>
+            <p class="hero-description hero-animate">
                 Know exactly what's used and where, what might break, and back it all up. 
                 Complete impact analysis down to the visual level across all workspaces.
             </p>
-            <div class="hero-badges">
+            <div class="hero-badges hero-animate">
                 <span class="badge">📊 Any User</span>
                 <span class="badge">💻 Any Computer</span>
                 <span class="badge">📁 Any Workspace</span>
                 <span class="badge badge-success">✓ 100% Free & Open Source</span>
             </div>
-            <div class="hero-cta">
+            <div class="hero-cta hero-animate">
                 <a href="#solutions" class="btn btn-primary">Explore Solutions</a>
-                <a href="https://github.com/BeSmarterWithData" target="_blank" class="btn btn-secondary">View on GitHub →</a>
+                <a href="https://github.com/BeSmarterWithData" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View on GitHub →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" aria-label="Platform statistics">
+        <div class="stats-grid">
+            <div class="stat-item fade-in">
+                <div class="stat-number" data-count="5">5</div>
+                <div class="stat-label">Specialized Solutions</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free & Open Source</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Admin Rights Required</div>
+            </div>
+            <div class="stat-item fade-in">
+                <div class="stat-number">1‑Click</div>
+                <div class="stat-label">Deployment</div>
             </div>
         </div>
     </section>
@@ -712,14 +1015,14 @@
     <!-- Features Section -->
     <section id="features" class="features-section">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <h2 class="section-title">Comprehensive Governance Features</h2>
                 <p class="section-subtitle">
                     Everything you need to manage, protect, and understand your Power BI environment
                 </p>
             </div>
             <div class="features-grid">
-                <div class="feature-card">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon">🔍</div>
                     <h3 class="feature-title">Visual Impact Analysis</h3>
                     <p class="feature-description">
@@ -727,7 +1030,7 @@
                         Know exactly what will break before you make changes.
                     </p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon">💾</div>
                     <h3 class="feature-title">Comprehensive Backups</h3>
                     <p class="feature-description">
@@ -735,7 +1038,7 @@
                         and dataflows. Never lose your work again.
                     </p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon">📊</div>
                     <h3 class="feature-title">Environment Overview</h3>
                     <p class="feature-description">
@@ -743,7 +1046,7 @@
                         reports, models, and all other Fabric Items in one place.
                     </p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon">🔗</div>
                     <h3 class="feature-title">Connection Tracking</h3>
                     <p class="feature-description">
@@ -751,7 +1054,7 @@
                         data sources and dependencies.
                     </p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon">📈</div>
                     <h3 class="feature-title">Refresh History</h3>
                     <p class="feature-description">
@@ -759,7 +1062,7 @@
                         patterns and troubleshoot issues.
                     </p>
                 </div>
-                <div class="feature-card">
+                <div class="feature-card fade-in-stagger">
                     <div class="feature-icon">⚡</div>
                     <h3 class="feature-title">No Admin Required</h3>
                     <p class="feature-description">
@@ -774,15 +1077,16 @@
     <!-- Solutions Section -->
     <section id="solutions" class="solutions-section">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <h2 class="section-title">Choose Your Impact IQ Solution</h2>
                 <p class="section-subtitle">
-                    Four specialized solutions to match your specific Power BI governance needs
+                    Five specialized solutions to match your specific Power BI governance needs
                 </p>
             </div>
             <div class="solutions-grid">
                 <!-- Impact IQ Core -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="solution-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ" class="solution-card fade-in-stagger" target="_blank" rel="noopener noreferrer">
+                    <span class="solution-recommended">Popular</span>
                     <div class="solution-icon">📊</div>
                     <h2 class="solution-title">Impact IQ</h2>
                     <div class="solution-badge-container">
@@ -801,7 +1105,7 @@
                 </a>
 
                 <!-- Impact IQ Local -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="solution-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-Local" class="solution-card fade-in-stagger" target="_blank" rel="noopener noreferrer">
                     <div class="solution-icon">💻</div>
                     <h2 class="solution-title">Impact IQ</h2>
                     <div class="solution-badge-container">
@@ -809,7 +1113,7 @@
                     </div>
                     <p class="solution-description">Local solution for offline PBIX/PBIT reports and models in development</p>
                     <ul class="solution-features">
-                        <li>Analyize local files with 1 click</li>
+                        <li>Analyze local files with 1 click</li>
                         <li>Works with legacy and PBIR report formats</li>
                         <li>No Admin rights required</li>
                         <li>No workspace access required</li>
@@ -819,7 +1123,7 @@
                 </a>
 
                 <!-- Impact IQ Semantic Link Labs -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="solution-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-SemanticLinkLabs" class="solution-card fade-in-stagger" target="_blank" rel="noopener noreferrer">
                     <div class="solution-icon">🔗</div>
                     <h2 class="solution-title">Impact IQ</h2>
                     <div class="solution-badge-container">
@@ -838,7 +1142,7 @@
                 </a>
 
                 <!-- Impact IQ Service Principal -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-ServicePrincipal" class="solution-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-ServicePrincipal" class="solution-card fade-in-stagger" target="_blank" rel="noopener noreferrer">
                     <div class="solution-icon">🤖</div>
                     <h2 class="solution-title">Impact IQ</h2>
                     <div class="solution-badge-container">
@@ -857,7 +1161,7 @@
                 </a>
 
                 <!-- Impact IQ Tenant Admin -->
-                <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="solution-card" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/BeSmarterWithData/ImpactIQ-TenantAdmin" class="solution-card fade-in-stagger" target="_blank" rel="noopener noreferrer">
                     <div class="solution-icon">⚙️</div>
                     <h2 class="solution-title">Impact IQ</h2>
                     <div class="solution-badge-container">
@@ -881,33 +1185,33 @@
     <!-- How It Works Section -->
     <section id="how-it-works" class="how-it-works">
         <div class="section-container">
-            <div class="section-header">
+            <div class="section-header fade-in">
                 <h2 class="section-title">How It Works</h2>
                 <p class="section-subtitle">Get started in minutes with our streamlined process</p>
             </div>
             <div class="steps-grid">
-                <div class="step-card">
+                <div class="step-card fade-in-stagger">
                     <div class="step-number">1</div>
                     <h3 class="step-title">Download</h3>
                     <p class="step-description">
                         Clone or download the solution from GitHub. All tools are included and portable.
                     </p>
                 </div>
-                <div class="step-card">
+                <div class="step-card fade-in-stagger">
                     <div class="step-number">2</div>
                     <h3 class="step-title">Run Script</h3>
                     <p class="step-description">
                         Execute the PowerShell script with one click. Automatic authentication and setup.
                     </p>
                 </div>
-                <div class="step-card">
+                <div class="step-card fade-in-stagger">
                     <div class="step-number">3</div>
                     <h3 class="step-title">Analyze</h3>
                     <p class="step-description">
                         Explore your Power BI environment with comprehensive insights and impact analysis.
                     </p>
                 </div>
-                <div class="step-card">
+                <div class="step-card fade-in-stagger">
                     <div class="step-number">4</div>
                     <h3 class="step-title">Govern</h3>
                     <p class="step-description">
@@ -921,14 +1225,14 @@
     <!-- Platform Compatibility -->
     <section class="compatibility">
         <div class="section-container">
-            <h2 class="section-title">Works With All Power BI Platforms</h2>
-            <p class="section-subtitle">Compatible with every workspace type and capacity</p>
+            <h2 class="section-title fade-in">Works With All Power BI Platforms</h2>
+            <p class="section-subtitle fade-in">Compatible with every workspace type and capacity</p>
             <div class="compatibility-badges">
-                <div class="compat-badge">✓ Power BI Pro</div>
-                <div class="compat-badge">✓ Premium</div>
-                <div class="compat-badge">✓ Premium Per User</div>
-                <div class="compat-badge">✓ Fabric</div>
-                <div class="compat-badge">✓ My Workspace</div>
+                <div class="compat-badge fade-in-stagger">✓ Power BI Pro</div>
+                <div class="compat-badge fade-in-stagger">✓ Premium</div>
+                <div class="compat-badge fade-in-stagger">✓ Premium Per User</div>
+                <div class="compat-badge fade-in-stagger">✓ Fabric</div>
+                <div class="compat-badge fade-in-stagger">✓ My Workspace</div>
             </div>
         </div>
     </section>
@@ -976,5 +1280,124 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" aria-label="Back to top" title="Back to top">↑</button>
+
+    <script>
+        // Mobile menu toggle
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        const navOverlay = document.querySelector('.nav-overlay');
+
+        function toggleMenu() {
+            const isOpen = navLinks.classList.toggle('open');
+            navToggle.classList.toggle('open');
+            navOverlay.classList.toggle('open');
+            navToggle.setAttribute('aria-expanded', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove('open');
+            navToggle.classList.remove('open');
+            navOverlay.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        navToggle.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', closeMenu);
+
+        // Close menu when clicking nav links
+        navLinks.querySelectorAll('a:not(.nav-cta)').forEach(function(link) {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMenu();
+        });
+
+        // Active nav highlighting on scroll
+        var navBar = document.querySelector('nav');
+        var sections = document.querySelectorAll('section[id]');
+        var navAnchors = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
+        function updateActiveNav() {
+            var scrollY = window.scrollY + 120;
+            sections.forEach(function(section) {
+                var top = section.offsetTop;
+                var height = section.offsetHeight;
+                var id = section.getAttribute('id');
+                if (scrollY >= top && scrollY < top + height) {
+                    navAnchors.forEach(function(a) {
+                        a.classList.remove('active');
+                        if (a.getAttribute('href') === '#' + id) {
+                            a.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+
+        // Nav shadow on scroll + back to top visibility
+        var backToTop = document.querySelector('.back-to-top');
+
+        function onScroll() {
+            if (window.scrollY > 50) {
+                navBar.classList.add('nav-scrolled');
+            } else {
+                navBar.classList.remove('nav-scrolled');
+            }
+
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            updateActiveNav();
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        backToTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Scroll-based entrance animations using IntersectionObserver
+        var fadeElements = document.querySelectorAll('.fade-in, .fade-in-stagger');
+
+        if ('IntersectionObserver' in window) {
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        // Add stagger delay for siblings
+                        if (entry.target.classList.contains('fade-in-stagger')) {
+                            var parent = entry.target.parentElement;
+                            var siblings = Array.from(parent.querySelectorAll('.fade-in-stagger'));
+                            var index = siblings.indexOf(entry.target);
+                            entry.target.style.transitionDelay = (index * 0.1) + 's';
+                        }
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach(function(el) {
+                observer.observe(el);
+            });
+        } else {
+            // Fallback: show everything immediately
+            fadeElements.forEach(function(el) {
+                el.classList.add('visible');
+            });
+        }
+    </script>
 </body>
 </html>
